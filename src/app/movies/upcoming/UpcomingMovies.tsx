@@ -17,13 +17,13 @@ type Movie = {
   poster_path: string;
 };
 
-const PopularMovies = () => {
+const UpcomingMovies = () => {
   const [page, setPage] = useState(1);
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["popularMovies", page],
+    queryKey: ["upcomingMovies", page],
     queryFn: () =>
       fetch(
-        `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
+        `https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=${page}`,
         fetchOptions
       ).then((res) => res.json()),
   });
@@ -45,4 +45,4 @@ const PopularMovies = () => {
   );
 };
 
-export default PopularMovies;
+export default UpcomingMovies;

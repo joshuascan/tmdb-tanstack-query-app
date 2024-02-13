@@ -13,18 +13,25 @@ import {
 import { css } from "../../../styled-system/css";
 import MovieCard from "@/components/MovieCard";
 
+const sectionStyles = flex({
+  justify: "space-between",
+  align: "center",
+  marginTop: 8,
+  bg: "#90cea1",
+  px: 8,
+  py: 4,
+  rounded: "md",
+});
+
 const h2Styles = css({
   fontSize: "4xl",
   fontWeight: "bold",
-  mb: 4,
 });
 
-const styledLink = css({
+const linkStyles = css({
   color: "white",
   fontWeight: "bold",
   fontSize: "md",
-  // display: "inline-block",
-  // width: 60,
   height: "fit-content",
   rounded: "lg",
   p: "2",
@@ -77,15 +84,9 @@ const Movies = () => {
       <Header />
       <div className={container({ my: 12 })}>
         <div>
-          <div
-            className={flex({
-              justify: "space-between",
-              align: "center",
-              marginTop: 8,
-            })}
-          >
+          <div className={sectionStyles}>
             <h2 className={h2Styles}>Top Rated Movies</h2>
-            <Link className={styledLink} href="/movies/top-rated">
+            <Link className={linkStyles} href="/movies/top-rated">
               See more
             </Link>
           </div>
@@ -97,15 +98,9 @@ const Movies = () => {
           </div>
         </div>
         <div>
-          <div
-            className={flex({
-              justify: "space-between",
-              align: "center",
-              marginTop: 8,
-            })}
-          >
+          <div className={sectionStyles}>
             <h2 className={h2Styles}>Popular Movies</h2>
-            <Link className={styledLink} href="/movies/popular">
+            <Link className={linkStyles} href="/movies/popular">
               See more
             </Link>
           </div>
@@ -117,21 +112,15 @@ const Movies = () => {
           </div>
         </div>
         <div>
-          <div
-            className={flex({
-              justify: "space-between",
-              align: "center",
-              marginTop: 8,
-            })}
-          >
+          <div className={sectionStyles}>
             <h2 className={h2Styles}>Upcoming Movies</h2>
-            <Link className={styledLink} href="/movies/upcoming">
+            <Link className={linkStyles} href="/movies/upcoming">
               See more
             </Link>
           </div>
           <div className={hstack({ gap: 8, justify: "space-between" })}>
-            {popularData &&
-              popularData.results
+            {upcomingData &&
+              upcomingData.results
                 .slice(0, 3)
                 .map((movie: any) => <MovieCard key={movie.id} {...movie} />)}
           </div>

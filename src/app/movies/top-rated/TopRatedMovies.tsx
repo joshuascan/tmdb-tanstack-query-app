@@ -32,9 +32,9 @@ const TopRatedMovies = () => {
   if (isError) return <div>There was an error.</div>;
 
   return (
-    <div className={flex({ direction: "column", align: "center" })}>
+    <div className={flex({ direction: "column" })}>
       <Header />
-      <div className={flex({ justify: "center", wrap: "wrap" })}>
+      <div className={flex({ justify: "center", wrap: "wrap", mt: 8 })}>
         {data &&
           data.results.map((movie: Movie) => (
             <MovieCard key={movie.id} {...movie} />
