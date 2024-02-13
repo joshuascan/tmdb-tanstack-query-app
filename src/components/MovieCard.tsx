@@ -31,9 +31,9 @@ const MovieCard = ({
     <div
       className={vstack({
         width: "1/4",
-        padding: "8",
+        p: "8",
         margin: "4",
-        borderRadius: "md",
+        rounded: "md",
         borderWidth: "1px",
         borderColor: "blue.500",
       })}

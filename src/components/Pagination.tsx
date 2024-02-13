@@ -11,7 +11,7 @@ type PaginationProps = {
 const buttonStyle = cva({
   base: {
     borderWidth: "2px",
-    borderRadius: "lg",
+    rounded: "lg",
     borderColor: "blue.700",
     cursor: "pointer",
     _hover: { bg: "blue.700" },
@@ -21,14 +21,14 @@ const buttonStyle = cva({
     size: {
       sm: {
         width: "24",
-        padding: "1",
+        p: "1",
       },
       md: {
         width: "32",
-        padding: "2",
+        p: "2",
       },
       lg: {
-        padding: "3",
+        p: "3",
         width: "40",
       },
     },

@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import TanstackProvider from "@/components/providers/TanstackProvider";
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import { css } from "../../styled-system/css";
 
 export const metadata: Metadata = {
   title: "TMDB App",
@@ -17,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={css({ bg: "#ffffff" })}>
         <TanstackProvider>{children}</TanstackProvider>
       </body>
     </html>
