@@ -1,11 +1,11 @@
 import { cva } from "../../styled-system/css";
 import { styled } from "../../styled-system/jsx";
-import { flex, hstack } from "../../styled-system/patterns";
+import { hstack, vstack } from "../../styled-system/patterns";
 
 type PaginationProps = {
   page: number;
   setPage: (page: number) => void;
-  totalPage: number;
+  totalPages: number;
 };
 
 const buttonStyle = cva({
@@ -37,14 +37,14 @@ const buttonStyle = cva({
 
 const Button = styled("button", buttonStyle);
 
-const Pagination = ({ page, setPage, totalPage }: PaginationProps) => {
+const Pagination = ({ page, setPage, totalPages }: PaginationProps) => {
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
   };
 
   return (
-    <div className={flex({ justify: "center", wrap: "wrap" })}>
-      <p>Page {page}</p>
+    <div className={vstack({ my: 10, gap: 2 })}>
+      <span>Page {page}</span>
       <div className={hstack({ gap: 4 })}>
         <Button
           size="md"
@@ -64,14 +64,14 @@ const Pagination = ({ page, setPage, totalPage }: PaginationProps) => {
         <Button
           size="lg"
           onClick={() => handlePageChange(page + 1)}
-          disabled={page === totalPage}
+          disabled={page === totalPages}
         >
           Next
         </Button>
         <Button
           size="md"
-          onClick={() => handlePageChange(totalPage)}
-          disabled={page === totalPage}
+          onClick={() => handlePageChange(totalPages)}
+          disabled={page === totalPages}
         >
           Last
         </Button>

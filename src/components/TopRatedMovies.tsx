@@ -8,6 +8,7 @@ import { flex, hstack, vstack } from "../../styled-system/patterns";
 import { css, cva } from "../../styled-system/css";
 import Header from "./Header";
 import { styled } from "../../styled-system/jsx";
+import Pagination from "./Pagination";
 
 type Movie = {
   id: number;
@@ -15,6 +16,7 @@ type Movie = {
   release_date: string;
   overview: string;
   vote_average: number;
+  poster_path: string;
 };
 
 const buttonStyle = cva({
@@ -73,40 +75,7 @@ const TopRatedMovies = () => {
             <MovieCard key={movie.id} {...movie} />
           ))}
       </div>
-      <div className={vstack({ my: 10, gap: 2 })}>
-        <span>Page {page}</span>
-        <div className={hstack({ gap: 4 })}>
-          <Button
-            size="md"
-            onClick={() => handlePageChange(1)}
-            disabled={page === 1}
-          >
-            First
-          </Button>
-          <Button
-            size="lg"
-            onClick={() => handlePageChange(page - 1)}
-            disabled={page === 1}
-          >
-            Previous
-          </Button>
-
-          <Button
-            size="lg"
-            onClick={() => handlePageChange(page + 1)}
-            disabled={page === data.total_pages}
-          >
-            Next
-          </Button>
-          <Button
-            size="md"
-            onClick={() => handlePageChange(data.total_pages)}
-            disabled={page === data.total_pages}
-          >
-            Last
-          </Button>
-        </div>
-      </div>
+      <Pagination page={page} setPage={setPage} totalPages={data.total_pages} />
     </div>
   );
 };
