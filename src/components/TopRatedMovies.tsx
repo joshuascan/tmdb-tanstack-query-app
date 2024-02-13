@@ -5,8 +5,9 @@ import { useState } from "react";
 import MovieCard from "./MovieCard";
 import fetchOptions from "@/lib/fetchOptions";
 import { flex, hstack, vstack } from "../../styled-system/patterns";
-import { css } from "../../styled-system/css";
+import { css, cva } from "../../styled-system/css";
 import Header from "./Header";
+import { styled } from "../../styled-system/jsx";
 
 type Movie = {
   id: number;
@@ -16,16 +17,34 @@ type Movie = {
   vote_average: number;
 };
 
-const buttonStyles = css({
-  borderWidth: "2px",
-  padding: "2",
-  borderRadius: "lg",
-  width: "32",
-  borderColor: "blue.700",
-  cursor: "pointer",
-  _hover: { bg: "blue.700" },
-  _active: { bg: "blue.900" },
+const buttonStyle = cva({
+  base: {
+    borderWidth: "2px",
+    borderRadius: "lg",
+    borderColor: "blue.700",
+    cursor: "pointer",
+    _hover: { bg: "blue.700" },
+    _active: { bg: "blue.900" },
+  },
+  variants: {
+    size: {
+      sm: {
+        width: "24",
+        padding: "1",
+      },
+      md: {
+        width: "32",
+        padding: "2",
+      },
+      lg: {
+        padding: "3",
+        width: "40",
+      },
+    },
+  },
 });
+
+const Button = styled("button", buttonStyle);
 
 const TopRatedMovies = () => {
   const [page, setPage] = useState(1);
@@ -57,35 +76,35 @@ const TopRatedMovies = () => {
       <div className={vstack({ my: 10, gap: 2 })}>
         <span>Page {page}</span>
         <div className={hstack({ gap: 4 })}>
-          <button
-            className={buttonStyles}
+          <Button
+            size="md"
             onClick={() => handlePageChange(1)}
             disabled={page === 1}
           >
             First
-          </button>
-          <button
-            className={buttonStyles}
+          </Button>
+          <Button
+            size="lg"
             onClick={() => handlePageChange(page - 1)}
             disabled={page === 1}
           >
             Previous
-          </button>
+          </Button>
 
-          <button
-            className={buttonStyles}
+          <Button
+            size="lg"
             onClick={() => handlePageChange(page + 1)}
             disabled={page === data.total_pages}
           >
             Next
-          </button>
-          <button
-            className={buttonStyles}
+          </Button>
+          <Button
+            size="md"
             onClick={() => handlePageChange(data.total_pages)}
             disabled={page === data.total_pages}
           >
             Last
-          </button>
+          </Button>
         </div>
       </div>
     </div>
