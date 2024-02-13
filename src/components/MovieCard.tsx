@@ -30,12 +30,13 @@ const MovieCard = ({
   return (
     <div
       className={vstack({
-        width: "1/4",
-        p: "8",
+        width: "350",
+        // height: 140,
+        p: "4",
         margin: "4",
-        rounded: "md",
-        borderWidth: "1px",
-        borderColor: "blue.500",
+        // rounded: "md",
+        // borderWidth: "1px",
+        // borderColor: "blue.500",
       })}
     >
       <Image
@@ -46,7 +47,7 @@ const MovieCard = ({
       />
       <h2
         className={css({
-          fontSize: "xl",
+          fontSize: "lg",
           fontWeight: "bold",
           textAlign: "center",
         })}
@@ -58,7 +59,11 @@ const MovieCard = ({
           fontSize: "lg",
           fontWeight: "bold",
           textAlign: "center",
-          color:
+          color: "white",
+          display: "inline-block",
+          rounded: "lg",
+          px: "2",
+          bgColor:
             roundedNumber < 5
               ? "red.500"
               : roundedNumber < 7
@@ -69,7 +74,7 @@ const MovieCard = ({
         {roundedNumber}
       </h3>
       <h3>{formattedDate}</h3>
-      <p>{overview}</p>
+      {/* <p>{overview}</p> */}
     </div>
   );
 };

@@ -8,7 +8,7 @@ type PaginationProps = {
   totalPages: number;
 };
 
-const buttonStyle = cva({
+const buttonStyles = cva({
   base: {
     borderWidth: "2px",
     rounded: "lg",
@@ -35,7 +35,7 @@ const buttonStyle = cva({
   },
 });
 
-const Button = styled("button", buttonStyle);
+const Button = styled("button", buttonStyles);
 
 const Pagination = ({ page, setPage, totalPages }: PaginationProps) => {
   const handlePageChange = (newPage: number) => {

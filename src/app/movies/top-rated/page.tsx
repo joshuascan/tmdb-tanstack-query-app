@@ -1,27 +1,13 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
-import TopRatedMovies from "@/components/TopRatedMovies";
+import getQueryClient from "@/lib/query-client";
+import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import TopRatedMovies from "./TopRatedMovies";
 
-export default function MoviePage() {
-  // const queryClient = new QueryClient();
-
-  // await queryClient.prefetchQuery({
-  //   queryKey: ["popularMovies"],
-  //   queryFn: () =>
-  //     fetch(
-  //       `https://api.themoviedb.org/3/movie/popular?api_key=${process.env.NEXT_PUBLIC_TMDB_API_KEY}`
-  //     ).then((res) => res.json()),
-  // });
+export default function Page() {
+  const queryClient = getQueryClient();
 
   return (
-    <>
-      {/* <HydrationBoundary state={dehydrate(queryClient)}> */}
+    <HydrationBoundary state={dehydrate(queryClient)}>
       <TopRatedMovies />
-
-      {/* </HydrationBoundary> */}
-    </>
+    </HydrationBoundary>
   );
 }

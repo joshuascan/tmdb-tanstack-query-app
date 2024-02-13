@@ -2,13 +2,11 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import MovieCard from "./MovieCard";
+import MovieCard from "@/components/MovieCard";
 import fetchOptions from "@/lib/fetchOptions";
-import { flex, hstack, vstack } from "../../styled-system/patterns";
-import { css, cva } from "../../styled-system/css";
-import Header from "./Header";
-import { styled } from "../../styled-system/jsx";
-import Pagination from "./Pagination";
+import { flex } from "../../../../styled-system/patterns";
+import Header from "@/components/Header";
+import Pagination from "@/components/Pagination";
 
 type Movie = {
   id: number;
@@ -18,35 +16,6 @@ type Movie = {
   vote_average: number;
   poster_path: string;
 };
-
-const buttonStyle = cva({
-  base: {
-    borderWidth: "2px",
-    rounded: "lg",
-    borderColor: "blue.700",
-    cursor: "pointer",
-    _hover: { bg: "blue.700" },
-    _active: { bg: "blue.900" },
-  },
-  variants: {
-    size: {
-      sm: {
-        width: "24",
-        p: "1",
-      },
-      md: {
-        width: "32",
-        p: "2",
-      },
-      lg: {
-        p: "3",
-        width: "40",
-      },
-    },
-  },
-});
-
-const Button = styled("button", buttonStyle);
 
 const TopRatedMovies = () => {
   const [page, setPage] = useState(1);
@@ -58,10 +27,6 @@ const TopRatedMovies = () => {
         fetchOptions
       ).then((res) => res.json()),
   });
-
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>There was an error.</div>;

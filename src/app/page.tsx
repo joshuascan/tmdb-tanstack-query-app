@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { css } from "../../styled-system/css";
 import Image from "next/image";
-import { center, container, vstack } from "../../styled-system/patterns";
+import { center, vstack } from "../../styled-system/patterns";
 
 const styledLink = css({
   color: "white",
