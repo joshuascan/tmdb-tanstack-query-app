@@ -4,23 +4,23 @@ import { css } from "../../styled-system/css";
 import { vstack } from "../../styled-system/patterns";
 import { EMPTY_MOVIE_URL, IMAGE_URL } from "@/lib/urls";
 
-type MovieCardProps = {
+type TvShowCard = {
   title: string;
-  release_date: string;
+  first_air_date: string;
   overview: string;
   vote_average: number;
   poster_path: string;
 };
 
-const MovieCard = ({
+const TvShowCard = ({
   title,
-  release_date,
+  first_air_date,
   overview,
   vote_average,
   poster_path,
-}: MovieCardProps) => {
+}: TvShowCard) => {
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
-  const formattedDate = new Date(release_date).toLocaleDateString("en-US", {
+  const formattedDate = new Date(first_air_date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -73,4 +73,4 @@ const MovieCard = ({
   );
 };
 
-export default MovieCard;
+export default TvShowCard;
