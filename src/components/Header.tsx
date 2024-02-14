@@ -6,7 +6,7 @@ import Image from "next/image";
 const styledLink = css({
   color: "white",
   fontWeight: "bold",
-  fontSize: "2xl",
+  fontSize: "22px",
   textTransform: "uppercase",
   _hover: {
     color: "gray.400",
@@ -31,16 +31,19 @@ const Header = () => {
       />
       <div
         className={flex({
-          gap: 16,
+          gap: 24,
           py: 6,
+          align: "center",
         })}
       >
         <Link className={styledLink} href="/">
           Home
         </Link>
+        <span className={css({ color: "white", fontSize: "2xl" })}>|</span>
         <Link className={styledLink} href="/movies">
           Movies
         </Link>
+        <span className={css({ color: "white", fontSize: "2xl" })}>|</span>
         <Link className={styledLink} href="/tv">
           TV Shows
         </Link>
