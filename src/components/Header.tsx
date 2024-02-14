@@ -22,14 +22,20 @@ const Header = () => {
         w: "100vw",
       })}
     >
-      <Image
-        className={css({ ml: 8 })}
-        src="/tmdb-logo.svg"
-        width={200}
-        height={50}
-        alt="TMDB Logo"
-        priority
-      />
+      <Link
+        className={flex({ align: "center" })}
+        href={"https://developer.themoviedb.org/docs/getting-started"}
+        target="_blank"
+      >
+        <Image
+          className={css({ ml: 8 })}
+          src="/tmdb-logo.svg"
+          width={200}
+          height={50}
+          alt="TMDB Logo"
+          priority
+        />
+      </Link>
       <div
         className={flex({
           gap: 24,
