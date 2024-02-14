@@ -1,36 +1,28 @@
 "use client";
 
-import fetchOptions from "@/lib/fetchOptions";
-import { useQuery } from "@tanstack/react-query";
 import { container } from "../../../styled-system/patterns";
 import SectionContent from "@/components/SectionContent";
 import LoadingPage from "@/components/LoadingPage";
+import useTMDBQuery from "@/hooks/useTMDBQuery";
+import { TvShowResponse } from "@/types";
 
 const TvShows = () => {
   const {
     data: topRatedData,
     isLoading: isLoadingTopRated,
     isError: isErrorTopRated,
-  } = useQuery({
-    queryKey: ["topRatedTvShows"],
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/tv/top_rated?language=en-US`,
-        fetchOptions
-      ).then((res) => res.json()),
+  } = useTMDBQuery<TvShowResponse>({
+    key: ["topRatedTvShows"],
+    endpoint: `/tv/top_rated?language=en-US`,
   });
 
   const {
     data: popularData,
     isLoading: isLoadingPopular,
     isError: isErrorPopular,
-  } = useQuery({
-    queryKey: ["popularTvShows"],
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/tv/popular?language=en-US`,
-        fetchOptions
-      ).then((res) => res.json()),
+  } = useTMDBQuery<TvShowResponse>({
+    key: ["popularTvShows"],
+    endpoint: `/tv/popular?language=en-US`,
   });
 
   if (isLoadingTopRated || isLoadingPopular) {

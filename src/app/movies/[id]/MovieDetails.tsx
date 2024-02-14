@@ -1,27 +1,25 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import fetchOptions from "@/lib/fetchOptions";
 import { flex } from "../../../../styled-system/patterns";
 import { useParams } from "next/navigation";
 import MovieDetailsCard from "@/components/MovieDetailsCard";
 import CastMemberCard from "@/components/CastMemberCard";
 import { css } from "../../../../styled-system/css";
 import LoadingPage from "@/components/LoadingPage";
+import useTMDBQuery from "@/hooks/useTMDBQuery";
+import { CastDetails, CreditsResponse, MovieDetails } from "@/types";
 
 const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
   const queryEnabled = id !== undefined;
+
   const {
     data: movieDetailsData,
     isLoading: isLoadingMovieDetails,
     isError: isErrorMovieDetails,
-  } = useQuery({
-    queryKey: ["movieDetails", id],
-    queryFn: () =>
-      fetch(`https://api.themoviedb.org/3/movie/${id}`, fetchOptions).then(
-        (res) => res.json()
-      ),
+  } = useTMDBQuery<MovieDetails>({
+    key: ["movieDetails", id],
+    endpoint: `/movie/${id}`,
     enabled: queryEnabled,
   });
 
@@ -29,13 +27,9 @@ const MovieDetails = () => {
     data: movieCreditsData,
     isLoading: isLoadingMovieCredits,
     isError: isErrorMovieCredits,
-  } = useQuery({
-    queryKey: ["movieCredits", id],
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/movie/${id}/credits`,
-        fetchOptions
-      ).then((res) => res.json()),
+  } = useTMDBQuery<CreditsResponse>({
+    key: ["movieCredits", id],
+    endpoint: `/movie/${id}/credits`,
     enabled: queryEnabled,
   });
 
@@ -64,13 +58,13 @@ const MovieDetails = () => {
             maxWidth: 1200,
           })}
         >
-          {movieCreditsData &&
+          {movieCreditsData && movieCreditsData.cast.length > 0 ? (
             movieCreditsData.cast
               .slice(0, 15)
-              .map((castMember: any) => (
+              .map((castMember: CastDetails) => (
                 <CastMemberCard key={castMember.id} {...castMember} />
-              ))}
-          {movieCreditsData.cast.length === 0 && (
+              ))
+          ) : (
             <p className={css({ fontSize: "lg", fontStyle: "italic" })}>
               There are no cast members to display.
             </p>

@@ -1,27 +1,25 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import fetchOptions from "@/lib/fetchOptions";
 import { flex } from "../../../../styled-system/patterns";
 import { useParams } from "next/navigation";
 import CastMemberCard from "@/components/CastMemberCard";
 import { css } from "../../../../styled-system/css";
 import LoadingPage from "@/components/LoadingPage";
 import TvDetailsCard from "@/components/TvDetailsCard";
+import useTMDBQuery from "@/hooks/useTMDBQuery";
+import { CastDetails, CreditsResponse, TvShowDetails } from "@/types";
 
 const TvDetails = () => {
   const { id } = useParams<{ id: string }>();
   const queryEnabled = id !== undefined;
+
   const {
     data: tvDetailsData,
     isLoading: isLoadingTvDetails,
     isError: isErrorTvDetails,
-  } = useQuery({
-    queryKey: ["tvDetails", id],
-    queryFn: () =>
-      fetch(`https://api.themoviedb.org/3/tv/${id}`, fetchOptions).then((res) =>
-        res.json()
-      ),
+  } = useTMDBQuery<TvShowDetails>({
+    key: ["tvDetails", id],
+    endpoint: `/tv/${id}`,
     enabled: queryEnabled,
   });
 
@@ -29,12 +27,9 @@ const TvDetails = () => {
     data: tvCreditsData,
     isLoading: isLoadingTvCredits,
     isError: isErrorTvCredits,
-  } = useQuery({
-    queryKey: ["tvCredits", id],
-    queryFn: () =>
-      fetch(`https://api.themoviedb.org/3/tv/${id}/credits`, fetchOptions).then(
-        (res) => res.json()
-      ),
+  } = useTMDBQuery<CreditsResponse>({
+    key: ["tvCredits", id],
+    endpoint: `/tv/${id}/credits`,
     enabled: queryEnabled,
   });
 
@@ -63,13 +58,13 @@ const TvDetails = () => {
             maxWidth: 1200,
           })}
         >
-          {tvCreditsData &&
+          {tvCreditsData && tvCreditsData.cast.length > 0 ? (
             tvCreditsData.cast
               .slice(0, 15)
-              .map((castMember: any) => (
+              .map((castMember: CastDetails) => (
                 <CastMemberCard key={castMember.id} {...castMember} />
-              ))}
-          {tvCreditsData.cast.length === 0 && (
+              ))
+          ) : (
             <p className={css({ fontSize: "lg", fontStyle: "italic" })}>
               There are no cast members to display.
             </p>

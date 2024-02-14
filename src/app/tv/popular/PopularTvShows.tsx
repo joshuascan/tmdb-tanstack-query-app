@@ -1,26 +1,25 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import fetchOptions from "@/lib/fetchOptions";
 import { flex } from "../../../../styled-system/patterns";
 import Pagination from "@/components/Pagination";
 import TvShowCard from "@/components/TvShowCard";
 import LoadingPage from "@/components/LoadingPage";
-import { TvShow } from "@/types";
+import { TvShow, TvShowResponse } from "@/types";
+import useTMDBQuery from "@/hooks/useTMDBQuery";
 
 const PopularTvShows = () => {
   const [page, setPage] = useState(1);
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ["popularTvShows", page],
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`,
-        fetchOptions
-      ).then((res) => res.json()),
+  const { data, isLoading, isError } = useTMDBQuery<TvShowResponse>({
+    key: ["popularTvShows", page],
+    endpoint: `/tv/popular?language=en-US&page=${page}`,
   });
 
-  const totalPages = data?.total_pages > 300 ? 300 : data?.total_pages;
+  const totalPages = data?.total_pages
+    ? data.total_pages > 300
+      ? 300
+      : data.total_pages
+    : 1;
 
   if (isLoading) return <LoadingPage />;
   if (isError) return <div>There was an error.</div>;

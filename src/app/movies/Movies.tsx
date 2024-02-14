@@ -1,49 +1,37 @@
 "use client";
 
-import fetchOptions from "@/lib/fetchOptions";
-import { useQuery } from "@tanstack/react-query";
 import { container } from "../../../styled-system/patterns";
 import SectionContent from "@/components/SectionContent";
 import LoadingPage from "@/components/LoadingPage";
+import useTMDBQuery from "@/hooks/useTMDBQuery";
+import { MovieResponse } from "@/types";
 
 const Movies = () => {
   const {
     data: topRatedData,
     isLoading: isLoadingTopRated,
     isError: isErrorTopRated,
-  } = useQuery({
-    queryKey: ["topRatedMovies"],
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/movie/top_rated?language=en-US`,
-        fetchOptions
-      ).then((res) => res.json()),
+  } = useTMDBQuery<MovieResponse>({
+    key: ["topRatedMovies"],
+    endpoint: `/movie/top_rated?language=en-US`,
   });
 
   const {
     data: popularData,
     isLoading: isLoadingPopular,
     isError: isErrorPopular,
-  } = useQuery({
-    queryKey: ["popularMovies"],
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/movie/popular?language=en-US`,
-        fetchOptions
-      ).then((res) => res.json()),
+  } = useTMDBQuery<MovieResponse>({
+    key: ["popularMovies"],
+    endpoint: `/movie/popular?language=en-US`,
   });
 
   const {
     data: upcomingData,
     isLoading: isLoadingUpcoming,
     isError: isErrorUpcoming,
-  } = useQuery({
-    queryKey: ["upcomingMovies"],
-    queryFn: () =>
-      fetch(
-        `https://api.themoviedb.org/3/movie/upcoming?language=en-US`,
-        fetchOptions
-      ).then((res) => res.json()),
+  } = useTMDBQuery<MovieResponse>({
+    key: ["upcomingMovies"],
+    endpoint: `/movie/upcoming?language=en-US`,
   });
 
   if (isLoadingTopRated || isLoadingPopular || isLoadingUpcoming) {
