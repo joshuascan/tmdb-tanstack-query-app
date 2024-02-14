@@ -7,6 +7,7 @@ import Pagination from "@/components/Pagination";
 import LoadingPage from "@/components/LoadingPage";
 import { Movie, MovieResponse } from "@/types";
 import useTMDBQuery from "@/hooks/useTMDBQuery";
+import { calculateTotalPages } from "@/utils/helperFunctions";
 
 const TopRatedMovies = () => {
   const [page, setPage] = useState(1);
@@ -15,11 +16,7 @@ const TopRatedMovies = () => {
     endpoint: `/movie/top_rated?language=en-US&page=${page}`,
   });
 
-  const totalPages = data?.total_pages
-    ? data.total_pages > 300
-      ? 300
-      : data.total_pages
-    : 1;
+  const totalPages = calculateTotalPages(data?.total_pages);
 
   if (isLoading) return <LoadingPage />;
   if (isError) return <div>There was an error.</div>;
