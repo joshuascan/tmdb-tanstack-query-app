@@ -1,18 +1,12 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import MovieCard from "@/components/MovieCard";
 import fetchOptions from "@/lib/fetchOptions";
-import { container, flex, hstack } from "../../../../styled-system/patterns";
-import Header from "@/components/Header";
-import Pagination from "@/components/Pagination";
-import { Movie } from "@/types";
+import { flex } from "../../../../styled-system/patterns";
 import { useParams } from "next/navigation";
 import MovieDetailsCard from "@/components/MovieDetailsCard";
-import MovieCastList from "@/components/MovieCastList";
 import CastMemberCard from "@/components/CastMemberCard";
 import { css } from "../../../../styled-system/css";
-import Spinner from "@/components/Spinner";
 import LoadingPage from "@/components/LoadingPage";
 
 const MovieDetails = () => {
@@ -50,7 +44,6 @@ const MovieDetails = () => {
 
   return (
     <div className={flex({ direction: "column" })}>
-      <Header />
       <MovieDetailsCard {...movieDetailsData} />
       <div
         className={flex({

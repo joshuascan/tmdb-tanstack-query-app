@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import TanstackProvider from "@/components/providers/TanstackProvider";
 import "./globals.css";
-import { css } from "../../styled-system/css";
+import Header from "@/components/Header";
 
 export const metadata: Metadata = {
   title: "TMDB App",
@@ -15,8 +15,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={css({ bg: "#ffffff" })}>
-        <TanstackProvider>{children}</TanstackProvider>
+      <body>
+        <TanstackProvider>
+          <Header />
+          {children}
+        </TanstackProvider>
       </body>
     </html>
   );

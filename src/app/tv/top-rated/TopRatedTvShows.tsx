@@ -4,10 +4,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import fetchOptions from "@/lib/fetchOptions";
 import { flex } from "../../../../styled-system/patterns";
-import Header from "@/components/Header";
 import Pagination from "@/components/Pagination";
 import TvShowCard from "@/components/TvShowCard";
-import Spinner from "@/components/Spinner";
 import LoadingPage from "@/components/LoadingPage";
 
 type TvShow = {
@@ -35,7 +33,6 @@ const TopRatedTvShows = () => {
 
   return (
     <div className={flex({ direction: "column" })}>
-      <Header />
       <div className={flex({ justify: "center", wrap: "wrap", mt: 8 })}>
         {data &&
           data.results.map((tvShow: TvShow) => (

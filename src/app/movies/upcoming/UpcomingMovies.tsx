@@ -5,9 +5,7 @@ import { useState } from "react";
 import MovieCard from "@/components/MovieCard";
 import fetchOptions from "@/lib/fetchOptions";
 import { flex } from "../../../../styled-system/patterns";
-import Header from "@/components/Header";
 import Pagination from "@/components/Pagination";
-import Spinner from "@/components/Spinner";
 import LoadingPage from "@/components/LoadingPage";
 
 type Movie = {
@@ -35,7 +33,6 @@ const UpcomingMovies = () => {
 
   return (
     <div className={flex({ direction: "column" })}>
-      <Header />
       <div className={flex({ justify: "center", wrap: "wrap", mt: 8 })}>
         {data &&
           data.results.map((movie: Movie) => (

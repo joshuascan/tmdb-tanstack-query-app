@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import fetchOptions from "@/lib/fetchOptions";
 import { useQuery } from "@tanstack/react-query";
 import { container } from "../../../styled-system/patterns";
@@ -34,22 +33,19 @@ const TvShows = () => {
   });
 
   return (
-    <div>
-      <Header />
-      <div className={container({ my: 12 })}>
-        <SectionContent
-          data={topRatedData}
-          title="Top Rated TV Shows"
-          href="/tv/top-rated"
-          type="tv"
-        />
-        <SectionContent
-          data={popularData}
-          title="Popular TV Shows"
-          href="/tv/popular"
-          type="tv"
-        />
-      </div>
+    <div className={container({ my: 12 })}>
+      <SectionContent
+        data={topRatedData}
+        title="Top Rated TV Shows"
+        href="/tv/top-rated"
+        type="tv"
+      />
+      <SectionContent
+        data={popularData}
+        title="Popular TV Shows"
+        href="/tv/popular"
+        type="tv"
+      />
     </div>
   );
 };
