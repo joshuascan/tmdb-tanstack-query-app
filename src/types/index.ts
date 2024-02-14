@@ -7,6 +7,18 @@ export type TvShow = {
   poster_path: string;
 };
 
+export type TvShowDetails = {
+  name: string;
+  first_air_date: string;
+  last_air_date: string;
+  overview: string;
+  vote_average: number;
+  poster_path: string;
+  number_of_episodes: number;
+  number_of_seasons: number;
+  genres: { id: number; name: string }[];
+};
+
 export type Movie = {
   id: number;
   title: string;

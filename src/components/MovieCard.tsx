@@ -79,7 +79,7 @@ const MovieCard = ({
                 ? "red.500"
                 : roundedNumber < 7
                 ? "yellow.500"
-                : "green.500",
+                : "green.600",
           })}
         >
           {roundedNumber}

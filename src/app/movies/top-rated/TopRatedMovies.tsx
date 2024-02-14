@@ -28,6 +28,8 @@ const TopRatedMovies = () => {
       ).then((res) => res.json()),
   });
 
+  const totalPages = data?.total_pages > 300 ? 300 : data?.total_pages;
+
   if (isLoading) return <LoadingPage />;
   if (isError) return <div>There was an error.</div>;
 
@@ -39,7 +41,7 @@ const TopRatedMovies = () => {
             <MovieCard key={movie.id} {...movie} />
           ))}
       </div>
-      <Pagination page={page} setPage={setPage} totalPages={data.total_pages} />
+      <Pagination page={page} setPage={setPage} totalPages={totalPages} />
     </div>
   );
 };

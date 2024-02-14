@@ -1,4 +1,4 @@
-import { MovieDetails } from "@/types";
+import { TvShowDetails } from "@/types";
 import { container, hstack, vstack } from "../../styled-system/patterns";
 import Image from "next/image";
 import { EMPTY_MOVIE_URL, IMAGE_URL } from "@/lib/urls";
@@ -24,25 +24,27 @@ const buttonStyles = css({
   },
 });
 
-const MovieDetailsCard = ({
-  budget,
-  genres,
-  title,
+const TvDetailsCard = ({
   overview,
   poster_path,
-  release_date,
-  revenue,
-  runtime,
   vote_average,
-}: MovieDetails) => {
+  name,
+  first_air_date,
+  last_air_date,
+  number_of_episodes,
+  number_of_seasons,
+  genres,
+}: TvShowDetails) => {
   const router = useRouter();
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
-  const formattedDate = new Date(release_date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
   const genresList = genres.map((genre) => genre.name).join(", ");
+
+  const formattedDate = (date: string) =>
+    new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   const handleBack = () => {
     if (window.history.length > 1) {
@@ -66,7 +68,7 @@ const MovieDetailsCard = ({
           }
           width={400}
           height={500}
-          alt={title}
+          alt={name}
         />
         <div
           className={vstack({
@@ -82,7 +84,7 @@ const MovieDetailsCard = ({
                 fontWeight: "bold",
               })}
             >
-              {title}
+              {name}
             </h1>
             <h3
               className={css({
@@ -104,15 +106,15 @@ const MovieDetailsCard = ({
               {roundedNumber}
             </h3>
           </div>
-          <div className={hstack()}>
-            <h3 className={h3Styles}>{formattedDate}</h3>
-            <h3>|</h3>
-            <h3 className={h3Styles}>{runtime} mins</h3>
-            <h3>|</h3>
-            <h3 className={h3Styles}>{genresList}</h3>
-          </div>
-          <h3 className={h3Styles}>Budget: ${budget.toLocaleString()}</h3>
-          <h3 className={h3Styles}>Revenue: ${revenue.toLocaleString()}</h3>
+
+          <h3 className={h3Styles}>
+            {formattedDate(first_air_date)} - {formattedDate(last_air_date)}
+          </h3>
+
+          <h3 className={h3Styles}>{genresList}</h3>
+
+          <h3 className={h3Styles}>Seasons: {number_of_seasons}</h3>
+          <h3 className={h3Styles}>Episodes: {number_of_episodes}</h3>
           <p className={css({ fontSize: "lg", mt: 8 })}>{overview}</p>
         </div>
       </div>
@@ -120,4 +122,4 @@ const MovieDetailsCard = ({
   );
 };
 
-export default MovieDetailsCard;
+export default TvDetailsCard;
