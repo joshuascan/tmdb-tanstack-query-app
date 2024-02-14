@@ -2,9 +2,9 @@
 
 import { container } from "../../../styled-system/patterns";
 import SectionContent from "@/components/SectionContent";
-import LoadingPage from "@/components/LoadingPage";
 import useTMDBQuery from "@/hooks/useTMDBQuery";
 import { TvShowResponse } from "@/types";
+import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 
 const TvShows = () => {
   const {
@@ -25,13 +25,14 @@ const TvShows = () => {
     endpoint: `/tv/popular?language=en-US`,
   });
 
-  if (isLoadingTopRated || isLoadingPopular) {
-    return <LoadingPage />;
-  }
+  const isLoading = isLoadingTopRated || isLoadingPopular;
+  const isError = isErrorTopRated || isErrorPopular;
 
-  if (isErrorTopRated || isErrorPopular) {
-    return <div>There was an error.</div>;
-  }
+  const loadingOrErrorComponent = useLoadingOrErrorComponent(
+    isLoading,
+    isError
+  );
+  if (loadingOrErrorComponent) return loadingOrErrorComponent;
 
   return (
     <div className={container({ my: 12 })}>

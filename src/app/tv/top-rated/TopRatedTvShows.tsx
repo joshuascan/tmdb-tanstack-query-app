@@ -4,10 +4,10 @@ import { useState } from "react";
 import { flex } from "../../../../styled-system/patterns";
 import Pagination from "@/components/Pagination";
 import TvShowCard from "@/components/TvShowCard";
-import LoadingPage from "@/components/LoadingPage";
 import { TvShow, TvShowResponse } from "@/types";
 import useTMDBQuery from "@/hooks/useTMDBQuery";
 import { calculateTotalPages } from "@/utils/helperFunctions";
+import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 
 const TopRatedTvShows = () => {
   const [page, setPage] = useState(1);
@@ -18,8 +18,11 @@ const TopRatedTvShows = () => {
 
   const totalPages = calculateTotalPages(data?.total_pages);
 
-  if (isLoading) return <LoadingPage />;
-  if (isError) return <div>There was an error.</div>;
+  const loadingOrErrorComponent = useLoadingOrErrorComponent(
+    isLoading,
+    isError
+  );
+  if (loadingOrErrorComponent) return loadingOrErrorComponent;
 
   return (
     <div className={flex({ direction: "column" })}>

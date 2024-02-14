@@ -5,9 +5,9 @@ import { useParams } from "next/navigation";
 import MovieDetailsCard from "@/components/MovieDetailsCard";
 import CastMemberCard from "@/components/CastMemberCard";
 import { css } from "../../../../styled-system/css";
-import LoadingPage from "@/components/LoadingPage";
 import useTMDBQuery from "@/hooks/useTMDBQuery";
 import { CastDetails, CreditsResponse, MovieDetails } from "@/types";
+import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 
 const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -33,9 +33,14 @@ const MovieDetails = () => {
     enabled: queryEnabled,
   });
 
-  if (isLoadingMovieDetails || isLoadingMovieCredits) return <LoadingPage />;
-  if (isErrorMovieDetails || isErrorMovieCredits)
-    return <div>There was an error.</div>;
+  const isLoading = isLoadingMovieDetails || isLoadingMovieCredits;
+  const isError = isErrorMovieDetails || isErrorMovieCredits;
+
+  const loadingOrErrorComponent = useLoadingOrErrorComponent(
+    isLoading,
+    isError
+  );
+  if (loadingOrErrorComponent) return loadingOrErrorComponent;
 
   return (
     <div className={flex({ direction: "column" })}>

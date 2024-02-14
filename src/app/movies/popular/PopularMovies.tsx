@@ -5,9 +5,9 @@ import MovieCard from "@/components/MovieCard";
 import { flex } from "../../../../styled-system/patterns";
 import Pagination from "@/components/Pagination";
 import { Movie, MovieResponse } from "@/types";
-import LoadingPage from "@/components/LoadingPage";
 import useTMDBQuery from "@/hooks/useTMDBQuery";
 import { calculateTotalPages } from "@/utils/helperFunctions";
+import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 
 const PopularMovies = () => {
   const [page, setPage] = useState(1);
@@ -18,8 +18,11 @@ const PopularMovies = () => {
 
   const totalPages = calculateTotalPages(data?.total_pages);
 
-  if (isLoading) return <LoadingPage />;
-  if (isError) return <div>There was an error.</div>;
+  const loadingOrErrorComponent = useLoadingOrErrorComponent(
+    isLoading,
+    isError
+  );
+  if (loadingOrErrorComponent) return loadingOrErrorComponent;
 
   return (
     <div className={flex({ direction: "column" })}>

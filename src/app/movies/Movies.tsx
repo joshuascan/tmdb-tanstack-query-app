@@ -2,9 +2,9 @@
 
 import { container } from "../../../styled-system/patterns";
 import SectionContent from "@/components/SectionContent";
-import LoadingPage from "@/components/LoadingPage";
 import useTMDBQuery from "@/hooks/useTMDBQuery";
 import { MovieResponse } from "@/types";
+import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 
 const Movies = () => {
   const {
@@ -34,13 +34,14 @@ const Movies = () => {
     endpoint: `/movie/upcoming?language=en-US`,
   });
 
-  if (isLoadingTopRated || isLoadingPopular || isLoadingUpcoming) {
-    return <LoadingPage />;
-  }
+  const isLoading = isLoadingTopRated || isLoadingPopular || isLoadingUpcoming;
+  const isError = isErrorTopRated || isErrorPopular || isErrorUpcoming;
 
-  if (isErrorTopRated || isErrorPopular || isErrorUpcoming) {
-    return <div>There was an error.</div>;
-  }
+  const loadingOrErrorComponent = useLoadingOrErrorComponent(
+    isLoading,
+    isError
+  );
+  if (loadingOrErrorComponent) return loadingOrErrorComponent;
 
   return (
     <div className={container({ my: 12 })}>
