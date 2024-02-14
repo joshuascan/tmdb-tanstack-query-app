@@ -28,6 +28,7 @@ const Header = () => {
         width={200}
         height={50}
         alt="TMDB Logo"
+        priority
       />
       <div
         className={flex({

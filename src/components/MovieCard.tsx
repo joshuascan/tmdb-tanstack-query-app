@@ -1,10 +1,12 @@
 "use client";
 import Image from "next/image";
 import { css } from "../../styled-system/css";
-import { vstack } from "../../styled-system/patterns";
+import { flex, vstack } from "../../styled-system/patterns";
 import { EMPTY_MOVIE_URL, IMAGE_URL } from "@/lib/urls";
 import { Movie } from "@/types";
 import Link from "next/link";
+import { useState } from "react";
+import Spinner from "./Spinner";
 
 const MovieCard = ({
   id,
@@ -13,12 +15,18 @@ const MovieCard = ({
   vote_average,
   poster_path,
 }: Movie) => {
+  const [isLoading, setIsLoading] = useState(true);
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
+
   const formattedDate = new Date(release_date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+
+  const handleImageLoad = () => {
+    setIsLoading(false);
+  };
 
   return (
     <Link href={`/movies/${id}`}>
@@ -28,13 +36,25 @@ const MovieCard = ({
           margin: "8",
         })}
       >
+        {isLoading && (
+          <div
+            className={flex({
+              align: "center",
+              height: "525px",
+              position: "absolute",
+            })}
+          >
+            <Spinner />
+          </div>
+        )}
         <Image
           src={
             poster_path ? `${IMAGE_URL}${poster_path}` : `${EMPTY_MOVIE_URL}`
           }
-          width={500}
-          height={750}
+          width={350}
+          height={525}
           alt={title}
+          onLoad={handleImageLoad}
         />
         <h2
           className={css({
