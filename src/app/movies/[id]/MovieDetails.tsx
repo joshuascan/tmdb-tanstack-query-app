@@ -13,6 +13,7 @@ import MovieCastList from "@/components/MovieCastList";
 import CastMemberCard from "@/components/CastMemberCard";
 import { css } from "../../../../styled-system/css";
 import Spinner from "@/components/Spinner";
+import LoadingPage from "@/components/LoadingPage";
 
 const MovieDetails = () => {
   const { id } = useParams<{ id: string }>();
@@ -44,7 +45,7 @@ const MovieDetails = () => {
     enabled: queryEnabled,
   });
 
-  if (isLoadingMovieDetails) return <Spinner />;
+  if (isLoadingMovieDetails) return <LoadingPage />;
   if (isErrorMovieDetails) return <div>There was an error.</div>;
 
   return (

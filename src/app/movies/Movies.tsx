@@ -5,6 +5,7 @@ import fetchOptions from "@/lib/fetchOptions";
 import { useQuery } from "@tanstack/react-query";
 import { container } from "../../../styled-system/patterns";
 import SectionContent from "@/components/SectionContent";
+import LoadingPage from "@/components/LoadingPage";
 
 const Movies = () => {
   const {
@@ -45,6 +46,14 @@ const Movies = () => {
         fetchOptions
       ).then((res) => res.json()),
   });
+
+  if (isLoadingTopRated || isLoadingPopular || isLoadingUpcoming) {
+    return <LoadingPage />;
+  }
+
+  if (isErrorTopRated || isErrorPopular || isErrorUpcoming) {
+    return <div>There was an error.</div>;
+  }
 
   return (
     <div>

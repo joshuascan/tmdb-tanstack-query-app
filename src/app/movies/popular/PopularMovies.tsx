@@ -9,6 +9,7 @@ import Header from "@/components/Header";
 import Pagination from "@/components/Pagination";
 import { Movie } from "@/types";
 import Spinner from "@/components/Spinner";
+import LoadingPage from "@/components/LoadingPage";
 
 const PopularMovies = () => {
   const [page, setPage] = useState(1);
@@ -21,7 +22,7 @@ const PopularMovies = () => {
       ).then((res) => res.json()),
   });
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <LoadingPage />;
   if (isError) return <div>There was an error.</div>;
 
   return (

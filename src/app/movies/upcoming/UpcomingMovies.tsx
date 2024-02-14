@@ -8,6 +8,7 @@ import { flex } from "../../../../styled-system/patterns";
 import Header from "@/components/Header";
 import Pagination from "@/components/Pagination";
 import Spinner from "@/components/Spinner";
+import LoadingPage from "@/components/LoadingPage";
 
 type Movie = {
   id: number;
@@ -29,7 +30,7 @@ const UpcomingMovies = () => {
       ).then((res) => res.json()),
   });
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <LoadingPage />;
   if (isError) return <div>There was an error.</div>;
 
   return (
