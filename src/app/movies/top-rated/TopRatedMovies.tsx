@@ -7,15 +7,7 @@ import fetchOptions from "@/lib/fetchOptions";
 import { flex } from "../../../../styled-system/patterns";
 import Pagination from "@/components/Pagination";
 import LoadingPage from "@/components/LoadingPage";
-
-type Movie = {
-  id: number;
-  title: string;
-  release_date: string;
-  overview: string;
-  vote_average: number;
-  poster_path: string;
-};
+import { Movie } from "@/types";
 
 const TopRatedMovies = () => {
   const [page, setPage] = useState(1);

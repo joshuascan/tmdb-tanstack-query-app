@@ -4,6 +4,7 @@ import fetchOptions from "@/lib/fetchOptions";
 import { useQuery } from "@tanstack/react-query";
 import { container } from "../../../styled-system/patterns";
 import SectionContent from "@/components/SectionContent";
+import LoadingPage from "@/components/LoadingPage";
 
 const TvShows = () => {
   const {
@@ -31,6 +32,14 @@ const TvShows = () => {
         fetchOptions
       ).then((res) => res.json()),
   });
+
+  if (isLoadingTopRated || isLoadingPopular) {
+    return <LoadingPage />;
+  }
+
+  if (isErrorTopRated || isErrorPopular) {
+    return <div>There was an error.</div>;
+  }
 
   return (
     <div className={container({ my: 12 })}>

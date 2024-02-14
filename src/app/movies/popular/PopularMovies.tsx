@@ -5,10 +5,8 @@ import { useState } from "react";
 import MovieCard from "@/components/MovieCard";
 import fetchOptions from "@/lib/fetchOptions";
 import { flex } from "../../../../styled-system/patterns";
-
 import Pagination from "@/components/Pagination";
 import { Movie } from "@/types";
-
 import LoadingPage from "@/components/LoadingPage";
 
 const PopularMovies = () => {

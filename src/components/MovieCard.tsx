@@ -1,4 +1,3 @@
-"use client";
 import Image from "next/image";
 import { css } from "../../styled-system/css";
 import { flex, vstack } from "../../styled-system/patterns";

@@ -7,15 +7,7 @@ import { flex } from "../../../../styled-system/patterns";
 import Pagination from "@/components/Pagination";
 import TvShowCard from "@/components/TvShowCard";
 import LoadingPage from "@/components/LoadingPage";
-
-type TvShow = {
-  id: number;
-  name: string;
-  first_air_date: string;
-  overview: string;
-  vote_average: number;
-  poster_path: string;
-};
+import { TvShow } from "@/types";
 
 const TopRatedTvShows = () => {
   const [page, setPage] = useState(1);
