@@ -7,6 +7,7 @@ import { flex } from "../../../../styled-system/patterns";
 import Header from "@/components/Header";
 import Pagination from "@/components/Pagination";
 import TvShowCard from "@/components/TvShowCard";
+import Spinner from "@/components/Spinner";
 
 type TvShow = {
   id: number;
@@ -28,7 +29,7 @@ const TopRatedTvShows = () => {
       ).then((res) => res.json()),
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <Spinner />;
   if (isError) return <div>There was an error.</div>;
 
   return (

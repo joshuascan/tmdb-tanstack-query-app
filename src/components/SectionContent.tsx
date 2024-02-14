@@ -15,10 +15,9 @@ const sectionStyles = flex({
   justify: "space-between",
   align: "center",
   marginTop: 8,
-  bg: "#90cea1",
+  bg: "slate.200",
   px: 8,
   py: 4,
-  rounded: "md",
 });
 
 const h2Styles = css({

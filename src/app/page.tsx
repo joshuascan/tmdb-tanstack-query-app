@@ -2,16 +2,14 @@
 import Link from "next/link";
 import { css } from "../../styled-system/css";
 import Image from "next/image";
-import { center, hstack, vstack } from "../../styled-system/patterns";
+import { center, hstack } from "../../styled-system/patterns";
 
 const styledLink = css({
   color: "white",
   fontWeight: "bold",
   fontSize: "4xl",
   display: "inline-block",
-  // width: 60,
   rounded: "md",
-  // p: "3",
   bg: "#0d253f",
   textAlign: "center",
   _hover: {

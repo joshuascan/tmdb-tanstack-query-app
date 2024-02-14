@@ -10,7 +10,6 @@ const MovieCard = ({
   id,
   title,
   release_date,
-  overview,
   vote_average,
   poster_path,
 }: Movie) => {
