@@ -6,6 +6,9 @@ const styledLink = css({
   color: "white",
   fontWeight: "bold",
   fontSize: "4xl",
+  _hover: {
+    color: "gray.400",
+  },
 });
 
 const Header = () => {

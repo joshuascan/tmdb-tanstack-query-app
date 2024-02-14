@@ -54,16 +54,19 @@ const Movies = () => {
           data={topRatedData}
           title="Top Rated Movies"
           href="/movies/top-rated"
+          type="movie"
         />
         <SectionContent
           data={popularData}
           title="Popular Movies"
           href="/movies/popular"
+          type="movie"
         />
         <SectionContent
           data={upcomingData}
           title="Upcoming Movies"
           href="/movies/upcoming"
+          type="movie"
         />
       </div>
     </div>

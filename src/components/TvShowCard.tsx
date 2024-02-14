@@ -3,23 +3,17 @@ import Image from "next/image";
 import { css } from "../../styled-system/css";
 import { vstack } from "../../styled-system/patterns";
 import { EMPTY_MOVIE_URL, IMAGE_URL } from "@/lib/urls";
-
-type TvShowCard = {
-  title: string;
-  first_air_date: string;
-  overview: string;
-  vote_average: number;
-  poster_path: string;
-};
+import { TvShow } from "@/types";
 
 const TvShowCard = ({
-  title,
+  name,
   first_air_date,
   overview,
   vote_average,
   poster_path,
-}: TvShowCard) => {
+}: TvShow) => {
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
+
   const formattedDate = new Date(first_air_date).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -30,15 +24,14 @@ const TvShowCard = ({
     <div
       className={vstack({
         width: "350",
-        p: "4",
-        margin: "4",
+        margin: "8",
       })}
     >
       <Image
         src={poster_path ? `${IMAGE_URL}${poster_path}` : `${EMPTY_MOVIE_URL}`}
         width={500}
         height={750}
-        alt={title}
+        alt={name}
       />
       <h2
         className={css({
@@ -47,7 +40,7 @@ const TvShowCard = ({
           textAlign: "center",
         })}
       >
-        {title}
+        {name}
       </h2>
       <h3
         className={css({

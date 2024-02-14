@@ -2,20 +2,28 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import MovieCard from "@/components/MovieCard";
 import fetchOptions from "@/lib/fetchOptions";
 import { flex } from "../../../../styled-system/patterns";
 import Header from "@/components/Header";
 import Pagination from "@/components/Pagination";
-import { Movie } from "@/types";
+import TvShowCard from "@/components/TvShowCard";
 
-const PopularMovies = () => {
+type TvShow = {
+  id: number;
+  name: string;
+  first_air_date: string;
+  overview: string;
+  vote_average: number;
+  poster_path: string;
+};
+
+const PopularTvShows = () => {
   const [page, setPage] = useState(1);
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["popularMovies", page],
+    queryKey: ["popularTvShows", page],
     queryFn: () =>
       fetch(
-        `https://api.themoviedb.org/3/movie/popular?language=en-US&page=${page}`,
+        `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${page}`,
         fetchOptions
       ).then((res) => res.json()),
   });
@@ -28,8 +36,8 @@ const PopularMovies = () => {
       <Header />
       <div className={flex({ justify: "center", wrap: "wrap", mt: 8 })}>
         {data &&
-          data.results.map((movie: Movie) => (
-            <MovieCard key={movie.id} {...movie} />
+          data.results.map((tvShow: TvShow) => (
+            <TvShowCard key={tvShow.id} {...tvShow} />
           ))}
       </div>
       <Pagination page={page} setPage={setPage} totalPages={data.total_pages} />
@@ -37,4 +45,4 @@ const PopularMovies = () => {
   );
 };
 
-export default PopularMovies;
+export default PopularTvShows;

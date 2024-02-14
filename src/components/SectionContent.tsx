@@ -35,6 +35,10 @@ const linkStyles = css({
   p: "2",
   bg: "#0d253f",
   textAlign: "center",
+  _hover: {
+    bg: "#1d3e65",
+    transition: "0.3s",
+  },
 });
 
 const SectionContent = ({ data, title, href, type }: SectionContentProps) => {
