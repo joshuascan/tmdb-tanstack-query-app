@@ -1,4 +1,4 @@
-import { cva } from "../../styled-system/css";
+import { css, cva } from "../../styled-system/css";
 import { styled } from "../../styled-system/jsx";
 import { hstack, vstack } from "../../styled-system/patterns";
 
@@ -10,11 +10,16 @@ type PaginationProps = {
 
 const buttonStyles = cva({
   base: {
+    color: "white",
+    fontWeight: "bold",
     borderWidth: "2px",
     rounded: "lg",
-    borderColor: "blue.700",
+    bg: "#0d253f",
     cursor: "pointer",
-    _hover: { bg: "blue.700" },
+    _hover: {
+      bg: "#1d3e65",
+      transition: "0.3s",
+    },
     _active: { bg: "blue.900" },
   },
   variants: {
@@ -43,8 +48,18 @@ const Pagination = ({ page, setPage, totalPages }: PaginationProps) => {
   };
 
   return (
-    <div className={vstack({ my: 10, gap: 2 })}>
-      <span>Page {page}</span>
+    <div
+      className={vstack({
+        paddingTop: 4,
+        paddingBottom: 10,
+        mt: 8,
+        gap: 2,
+        bg: "slate.200",
+      })}
+    >
+      <p className={css({ fontWeight: "bold", fontSize: "xl", mb: 2 })}>
+        Page {page}
+      </p>
       <div className={hstack({ gap: 4 })}>
         <Button
           size="md"

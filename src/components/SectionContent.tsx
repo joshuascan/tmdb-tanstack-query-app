@@ -38,6 +38,7 @@ const linkStyles = css({
     bg: "#1d3e65",
     transition: "0.3s",
   },
+  _active: { bg: "blue.900" },
 });
 
 const SectionContent = ({ data, title, href, type }: SectionContentProps) => {

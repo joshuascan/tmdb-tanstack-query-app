@@ -21,7 +21,7 @@ const styledLink = css({
 
 export default function Home() {
   return (
-    <div className={hstack({ gap: 32, marginTop: 32, justify: "center" })}>
+    <div className={hstack({ gap: 32, marginTop: 56, justify: "center" })}>
       <Link className={styledLink} href="/movies">
         <h2>Movies</h2>
         <Image

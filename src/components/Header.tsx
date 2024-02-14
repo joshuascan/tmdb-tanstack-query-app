@@ -20,6 +20,9 @@ const Header = () => {
         justify: "space-between",
         bg: "#0d253f",
         w: "100vw",
+        position: "sticky",
+        top: 0,
+        zIndex: 10,
       })}
     >
       <Link
