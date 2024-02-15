@@ -4,11 +4,15 @@ import { flex, hstack } from "../../styled-system/patterns";
 import MovieCard from "./MovieCard";
 import TvShowCard from "./TvShowCard";
 
+type MediaItem = {
+  id: number;
+};
+
 type SectionContentProps = {
-  data: any;
+  data: { results: MediaItem[] };
   title: string;
   href: string;
-  type: string;
+  type: "movie" | "tv";
 };
 
 const sectionStyles = flex({
@@ -42,6 +46,8 @@ const linkStyles = css({
 });
 
 const SectionContent = ({ data, title, href, type }: SectionContentProps) => {
+  const CardComponent = type === "movie" ? MovieCard : TvShowCard;
+
   return (
     <div>
       <div className={sectionStyles}>
@@ -52,13 +58,9 @@ const SectionContent = ({ data, title, href, type }: SectionContentProps) => {
       </div>
       <div className={hstack({ gap: 8, justify: "space-between" })}>
         {data &&
-          data.results.slice(0, 3).map((item: any) => {
-            return type === "movie" ? (
-              <MovieCard key={item.id} data={item} />
-            ) : (
-              <TvShowCard key={item.id} data={item} />
-            );
-          })}
+          data?.results
+            .slice(0, 3)
+            .map((item: any) => <CardComponent key={item.id} data={item} />)}
       </div>
     </div>
   );
