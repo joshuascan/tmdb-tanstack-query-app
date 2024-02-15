@@ -41,7 +41,7 @@ const TvShows = () => {
           data={topRatedData}
           title="Top Rated TV Shows"
           href="/tv/top-rated"
-          type="tv"
+          mediaType="tv"
         />
       )}
       {popularData && (
@@ -49,7 +49,7 @@ const TvShows = () => {
           data={popularData}
           title="Popular TV Shows"
           href="/tv/popular"
-          type="tv"
+          mediaType="tv"
         />
       )}
     </div>

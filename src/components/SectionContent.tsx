@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { css } from "../../styled-system/css";
 import { flex, hstack } from "../../styled-system/patterns";
-import MovieCard from "./MovieCard";
-import TvShowCard from "./TvShowCard";
+import MediaCard from "./MediaCard";
 
 type MediaItem = {
   id: number;
@@ -12,13 +11,14 @@ type SectionContentProps = {
   data?: { results: MediaItem[] };
   title: string;
   href: string;
-  type: "movie" | "tv";
+  mediaType: "movie" | "tv";
 };
 
 const sectionStyles = flex({
   justify: "space-between",
   align: "center",
-  marginTop: 8,
+  mt: 8,
+  mb: 4,
   bg: "slate.200",
   px: 8,
   py: 4,
@@ -45,9 +45,12 @@ const linkStyles = css({
   _active: { bg: "blue.900" },
 });
 
-const SectionContent = ({ data, title, href, type }: SectionContentProps) => {
-  const CardComponent = type === "movie" ? MovieCard : TvShowCard;
-
+const SectionContent = ({
+  data,
+  title,
+  href,
+  mediaType,
+}: SectionContentProps) => {
   return (
     <div>
       <div className={sectionStyles}>
@@ -66,7 +69,9 @@ const SectionContent = ({ data, title, href, type }: SectionContentProps) => {
         {data &&
           data?.results
             .slice(0, 3)
-            .map((item: any) => <CardComponent key={item.id} data={item} />)}
+            .map((item: any) => (
+              <MediaCard key={item.id} data={item} mediaType={mediaType} />
+            ))}
       </div>
     </div>
   );

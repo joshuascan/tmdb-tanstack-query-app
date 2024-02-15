@@ -50,7 +50,7 @@ const Movies = () => {
           data={topRatedData}
           title="Top Rated Movies"
           href="/movies/top-rated"
-          type="movie"
+          mediaType="movie"
         />
       )}
       {popularData && (
@@ -58,15 +58,15 @@ const Movies = () => {
           data={popularData}
           title="Popular Movies"
           href="/movies/popular"
-          type="movie"
+          mediaType="movie"
         />
       )}
-      {upcomingData && ( // Add this lin}
+      {upcomingData && (
         <SectionContent
           data={upcomingData}
           title="Upcoming Movies"
           href="/movies/upcoming"
-          type="movie"
+          mediaType="movie"
         />
       )}
     </div>
