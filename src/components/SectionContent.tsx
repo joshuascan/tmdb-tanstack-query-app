@@ -56,7 +56,7 @@ const SectionContent = ({ data, title, href, type }: SectionContentProps) => {
             return type === "movie" ? (
               <MovieCard key={item.id} data={item} />
             ) : (
-              <TvShowCard key={item.id} {...item} />
+              <TvShowCard key={item.id} data={item} />
             );
           })}
       </div>

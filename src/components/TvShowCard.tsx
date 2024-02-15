@@ -8,13 +8,12 @@ import Spinner from "./Spinner";
 import Link from "next/link";
 import { formatDate } from "@/utils/helperFunctions";
 
-const TvShowCard = ({
-  id,
-  name,
-  first_air_date,
-  vote_average,
-  poster_path,
-}: TvShow) => {
+interface TvShowCardProps {
+  data: TvShow;
+}
+
+const TvShowCard: React.FC<TvShowCardProps> = ({ data }) => {
+  const { id, name, first_air_date, vote_average, poster_path } = data;
   const [isLoading, setIsLoading] = useState(true);
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
 
