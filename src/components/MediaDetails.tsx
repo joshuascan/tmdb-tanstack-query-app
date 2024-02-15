@@ -14,7 +14,6 @@ import MovieDetailsCard from "./MovieDetailsCard";
 import TvDetailsCard from "./TvDetailsCard";
 
 interface MediaDetailsProps {
-  detailsCard: React.ReactElement;
   type: "movie" | "tv";
 }
 

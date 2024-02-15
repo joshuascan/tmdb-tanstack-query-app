@@ -3,7 +3,6 @@ import { container, hstack, vstack } from "../../styled-system/patterns";
 import Image from "next/image";
 import { EMPTY_MOVIE_URL, IMAGE_URL } from "@/lib/urls";
 import { css } from "../../styled-system/css";
-import { useRouter } from "next/navigation";
 import { formatDate } from "@/utils/helperFunctions";
 import BackButton from "./BackButton";
 
@@ -23,7 +22,6 @@ const TvDetailsCard = ({
   number_of_seasons,
   genres,
 }: TvShowDetails) => {
-  const router = useRouter();
   const roundedNumber = Number(parseFloat(vote_average?.toFixed(1) ?? "0"));
   const genresList = genres?.map((genre) => genre.name).join(", ");
   const firstAirDate = first_air_date

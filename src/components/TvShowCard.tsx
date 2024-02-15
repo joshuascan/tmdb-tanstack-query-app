@@ -23,61 +23,62 @@ const TvShowCard: React.FC<TvShowCardProps> = ({ data }) => {
 
   return (
     <div
-      className={vstack({
-        width: "350",
+      className={css({
         margin: "8",
       })}
     >
       <Link href={`/tv/${id}`}>
-        {isLoading && (
-          <div
-            className={flex({
-              align: "center",
-              height: "525px",
-              position: "absolute",
+        <div className={vstack({ w: 350 })}>
+          {isLoading && (
+            <div
+              className={flex({
+                align: "center",
+                height: "525px",
+                position: "absolute",
+              })}
+            >
+              <Spinner />
+            </div>
+          )}
+          <Image
+            src={
+              poster_path ? `${IMAGE_URL}${poster_path}` : `${EMPTY_MOVIE_URL}`
+            }
+            width={350}
+            height={525}
+            alt={name}
+            onLoad={handleImageLoad}
+          />
+          <h2
+            className={css({
+              fontSize: "lg",
+              fontWeight: "bold",
+              textAlign: "center",
             })}
           >
-            <Spinner />
-          </div>
-        )}
-        <Image
-          src={
-            poster_path ? `${IMAGE_URL}${poster_path}` : `${EMPTY_MOVIE_URL}`
-          }
-          width={350}
-          height={525}
-          alt={name}
-          onLoad={handleImageLoad}
-        />
-        <h2
-          className={css({
-            fontSize: "lg",
-            fontWeight: "bold",
-            textAlign: "center",
-          })}
-        >
-          {name}
-        </h2>
-        <h3
-          className={css({
-            fontSize: "lg",
-            fontWeight: "bold",
-            textAlign: "center",
-            color: "white",
-            display: "inline-block",
-            rounded: "lg",
-            px: "2",
-            bgColor:
-              roundedNumber < 5
-                ? "red.500"
-                : roundedNumber < 7
-                ? "yellow.500"
-                : "green.600",
-          })}
-        >
-          {roundedNumber}
-        </h3>
-        <h3>{formatDate(first_air_date)}</h3>
+            {name}
+          </h2>
+          <h3
+            className={css({
+              fontSize: "lg",
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "white",
+              display: "inline-block",
+              rounded: "lg",
+              px: "2",
+              bgColor:
+                roundedNumber < 5
+                  ? "red.500"
+                  : roundedNumber < 7
+                  ? "yellow.500"
+                  : "green.600",
+            })}
+          >
+            {roundedNumber}
+          </h3>
+          <h3>{formatDate(first_air_date)}</h3>
+        </div>
       </Link>
     </div>
   );

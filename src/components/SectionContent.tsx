@@ -56,7 +56,13 @@ const SectionContent = ({ data, title, href, type }: SectionContentProps) => {
           See more
         </Link>
       </div>
-      <div className={hstack({ gap: 8, justify: "space-between" })}>
+      <div
+        className={hstack({
+          gap: 8,
+          justify: "space-between",
+          alignItems: "start",
+        })}
+      >
         {data &&
           data?.results
             .slice(0, 3)
