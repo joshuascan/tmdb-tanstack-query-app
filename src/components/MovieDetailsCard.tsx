@@ -33,7 +33,7 @@ const MovieDetailsCard = ({
   return (
     <div className={container({ marginTop: 12 })}>
       <BackButton />
-      <div className={hstack({ alignItems: "start", gap: 12 })}>
+      <div className={hstack({ alignItems: "start", gap: 12, mt: 4 })}>
         <Image
           src={
             poster_path ? `${IMAGE_URL}${poster_path}` : `${EMPTY_MOVIE_URL}`

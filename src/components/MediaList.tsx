@@ -4,6 +4,8 @@ import useTMDBQuery from "@/hooks/useTMDBQuery";
 import { calculateTotalPages } from "@/utils/helperFunctions";
 import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 import { flex } from "../../styled-system/patterns";
+import BackButton from "./BackButton";
+import { css } from "../../styled-system/css";
 
 interface MediaItem {
   id: number;
@@ -39,7 +41,19 @@ const MediaList = <T extends MediaItem>({
 
   return (
     <div className={flex({ direction: "column" })}>
-      <div className={flex({ justify: "center", wrap: "wrap", mt: 8 })}>
+      <div
+        className={flex({
+          // borderWidth: "1px",
+          // borderColor: "red",
+          mt: 6,
+          width: "90vw",
+          mx: "auto",
+          align: "center",
+        })}
+      >
+        <BackButton />
+      </div>
+      <div className={flex({ justify: "center", wrap: "wrap" })}>
         {data?.results.map((item) => (
           <CardComponent key={item.id} data={item} />
         ))}

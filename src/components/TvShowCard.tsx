@@ -22,13 +22,13 @@ const TvShowCard: React.FC<TvShowCardProps> = ({ data }) => {
   };
 
   return (
-    <Link href={`/tv/${id}`}>
-      <div
-        className={vstack({
-          width: "350",
-          margin: "8",
-        })}
-      >
+    <div
+      className={vstack({
+        width: "350",
+        margin: "8",
+      })}
+    >
+      <Link href={`/tv/${id}`}>
         {isLoading && (
           <div
             className={flex({
@@ -78,8 +78,8 @@ const TvShowCard: React.FC<TvShowCardProps> = ({ data }) => {
           {roundedNumber}
         </h3>
         <h3>{formatDate(first_air_date)}</h3>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 

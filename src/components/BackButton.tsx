@@ -7,7 +7,6 @@ const buttonStyles = css({
   rounded: "md",
   py: "1",
   px: "2",
-  mb: 4,
   cursor: "pointer",
   _hover: {
     bg: "gray.200",

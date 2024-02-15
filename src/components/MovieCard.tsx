@@ -22,13 +22,13 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
   };
 
   return (
-    <Link href={`/movies/${id}`}>
-      <div
-        className={vstack({
-          width: "350",
-          margin: "8",
-        })}
-      >
+    <div
+      className={vstack({
+        width: "350",
+        margin: "8",
+      })}
+    >
+      <Link href={`/movies/${id}`}>
         {isLoading && (
           <div
             className={flex({
@@ -78,8 +78,8 @@ const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
           {roundedNumber}
         </h3>
         <h3>{formatDate(release_date)}</h3>
-      </div>
-    </Link>
+      </Link>
+    </div>
   );
 };
 
