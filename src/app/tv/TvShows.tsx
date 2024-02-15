@@ -36,18 +36,22 @@ const TvShows = () => {
 
   return (
     <div className={container({ my: 12 })}>
-      <SectionContent
-        data={topRatedData}
-        title="Top Rated TV Shows"
-        href="/tv/top-rated"
-        type="tv"
-      />
-      <SectionContent
-        data={popularData}
-        title="Popular TV Shows"
-        href="/tv/popular"
-        type="tv"
-      />
+      {topRatedData && (
+        <SectionContent
+          data={topRatedData}
+          title="Top Rated TV Shows"
+          href="/tv/top-rated"
+          type="tv"
+        />
+      )}
+      {popularData && (
+        <SectionContent
+          data={popularData}
+          title="Popular TV Shows"
+          href="/tv/popular"
+          type="tv"
+        />
+      )}
     </div>
   );
 };

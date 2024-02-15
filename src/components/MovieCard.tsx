@@ -8,13 +8,12 @@ import { useState } from "react";
 import Spinner from "./Spinner";
 import { formatDate } from "@/utils/helperFunctions";
 
-const MovieCard = ({
-  id,
-  title,
-  release_date,
-  vote_average,
-  poster_path,
-}: Movie) => {
+interface MovieCardProps {
+  data: Movie;
+}
+
+const MovieCard: React.FC<MovieCardProps> = ({ data }) => {
+  const { id, title, release_date, vote_average, poster_path } = data;
   const [isLoading, setIsLoading] = useState(true);
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
 

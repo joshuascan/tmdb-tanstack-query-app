@@ -34,7 +34,7 @@ const Header = () => {
           className={css({ ml: 8 })}
           src="/tmdb-logo.svg"
           width={200}
-          height={50}
+          height={26}
           alt="TMDB Logo"
           priority
         />
