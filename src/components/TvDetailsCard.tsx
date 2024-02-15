@@ -4,24 +4,12 @@ import Image from "next/image";
 import { EMPTY_MOVIE_URL, IMAGE_URL } from "@/lib/urls";
 import { css } from "../../styled-system/css";
 import { useRouter } from "next/navigation";
+import { formatDate } from "@/utils/helperFunctions";
+import BackButton from "./BackButton";
 
 const h3Styles = css({
   fontSize: "lg",
   fontStyle: "italic",
-});
-
-const buttonStyles = css({
-  fontWeight: "bold",
-  fontSize: "md",
-  rounded: "md",
-  py: "1",
-  px: "2",
-  mb: 4,
-  cursor: "pointer",
-  _hover: {
-    bg: "gray.200",
-    transition: "0.3s",
-  },
 });
 
 const TvDetailsCard = ({
@@ -36,31 +24,16 @@ const TvDetailsCard = ({
   genres,
 }: TvShowDetails) => {
   const router = useRouter();
-  const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
-  const genresList = genres.map((genre) => genre.name).join(", ");
-
-  const formattedDate = (date: string) =>
-    new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-
-  const handleBack = () => {
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/");
-    }
-  };
+  const roundedNumber = Number(parseFloat(vote_average?.toFixed(1) ?? "0"));
+  const genresList = genres?.map((genre) => genre.name).join(", ");
+  const firstAirDate = first_air_date
+    ? formatDate(first_air_date)
+    : "Unavailable";
+  const lastAirDate = last_air_date ? formatDate(last_air_date) : "N/A";
 
   return (
     <div className={container({ marginTop: 12 })}>
-      <div>
-        <button onClick={handleBack} className={buttonStyles}>
-          ← Back
-        </button>
-      </div>
+      <BackButton />
       <div className={hstack({ alignItems: "start", gap: 12 })}>
         <Image
           src={
@@ -68,7 +41,7 @@ const TvDetailsCard = ({
           }
           width={400}
           height={500}
-          alt={name}
+          alt={name ?? "TV Show Poster"}
         />
         <div
           className={vstack({
@@ -108,7 +81,7 @@ const TvDetailsCard = ({
           </div>
 
           <h3 className={h3Styles}>
-            {formattedDate(first_air_date)} - {formattedDate(last_air_date)}
+            {firstAirDate} - {lastAirDate}
           </h3>
 
           <h3 className={h3Styles}>{genresList}</h3>

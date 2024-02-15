@@ -4,24 +4,12 @@ import Image from "next/image";
 import { EMPTY_MOVIE_URL, IMAGE_URL } from "@/lib/urls";
 import { css } from "../../styled-system/css";
 import { useRouter } from "next/navigation";
+import { formatDate } from "@/utils/helperFunctions";
+import BackButton from "./BackButton";
 
 const h3Styles = css({
   fontSize: "lg",
   fontStyle: "italic",
-});
-
-const buttonStyles = css({
-  fontWeight: "bold",
-  fontSize: "md",
-  rounded: "md",
-  py: "1",
-  px: "2",
-  mb: 4,
-  cursor: "pointer",
-  _hover: {
-    bg: "gray.200",
-    transition: "0.3s",
-  },
 });
 
 const MovieDetailsCard = ({
@@ -36,29 +24,15 @@ const MovieDetailsCard = ({
   vote_average,
 }: MovieDetails) => {
   const router = useRouter();
-  const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
-  const formattedDate = new Date(release_date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  const genresList = genres.map((genre) => genre.name).join(", ");
-
-  const handleBack = () => {
-    if (window.history.length > 1) {
-      router.back();
-    } else {
-      router.push("/");
-    }
-  };
+  const roundedNumber = Number(parseFloat(vote_average?.toFixed(1) ?? "0"));
+  const releaseDate = release_date
+    ? formatDate(release_date)
+    : "Unknown Release Date";
+  const genresList = genres?.map((genre) => genre.name).join(", ");
 
   return (
     <div className={container({ marginTop: 12 })}>
-      <div>
-        <button onClick={handleBack} className={buttonStyles}>
-          ← Back
-        </button>
-      </div>
+      <BackButton />
       <div className={hstack({ alignItems: "start", gap: 12 })}>
         <Image
           src={
@@ -66,7 +40,7 @@ const MovieDetailsCard = ({
           }
           width={400}
           height={500}
-          alt={title}
+          alt={title ?? "Movie Poster"}
         />
         <div
           className={vstack({
@@ -105,14 +79,14 @@ const MovieDetailsCard = ({
             </h3>
           </div>
           <div className={hstack()}>
-            <h3 className={h3Styles}>{formattedDate}</h3>
+            <h3 className={h3Styles}>{releaseDate}</h3>
             <h3>|</h3>
             <h3 className={h3Styles}>{runtime} mins</h3>
             <h3>|</h3>
             <h3 className={h3Styles}>{genresList}</h3>
           </div>
-          <h3 className={h3Styles}>Budget: ${budget.toLocaleString()}</h3>
-          <h3 className={h3Styles}>Revenue: ${revenue.toLocaleString()}</h3>
+          <h3 className={h3Styles}>Budget: ${budget?.toLocaleString()}</h3>
+          <h3 className={h3Styles}>Revenue: ${revenue?.toLocaleString()}</h3>
           <p className={css({ fontSize: "lg", mt: 8 })}>{overview}</p>
         </div>
       </div>

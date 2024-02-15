@@ -6,6 +6,7 @@ import { Movie } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 import Spinner from "./Spinner";
+import { formatDate } from "@/utils/helperFunctions";
 
 const MovieCard = ({
   id,
@@ -16,12 +17,6 @@ const MovieCard = ({
 }: Movie) => {
   const [isLoading, setIsLoading] = useState(true);
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
-
-  const formattedDate = new Date(release_date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 
   const handleImageLoad = () => {
     setIsLoading(false);
@@ -83,7 +78,7 @@ const MovieCard = ({
         >
           {roundedNumber}
         </h3>
-        <h3>{formattedDate}</h3>
+        <h3>{formatDate(release_date)}</h3>
       </div>
     </Link>
   );

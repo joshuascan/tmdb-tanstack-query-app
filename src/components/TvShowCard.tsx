@@ -6,6 +6,7 @@ import { TvShow } from "@/types";
 import { useState } from "react";
 import Spinner from "./Spinner";
 import Link from "next/link";
+import { formatDate } from "@/utils/helperFunctions";
 
 const TvShowCard = ({
   id,
@@ -16,12 +17,6 @@ const TvShowCard = ({
 }: TvShow) => {
   const [isLoading, setIsLoading] = useState(true);
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
-
-  const formattedDate = new Date(first_air_date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 
   const handleImageLoad = () => {
     setIsLoading(false);
@@ -83,7 +78,7 @@ const TvShowCard = ({
         >
           {roundedNumber}
         </h3>
-        <h3>{formattedDate}</h3>
+        <h3>{formatDate(first_air_date)}</h3>
       </div>
     </Link>
   );
