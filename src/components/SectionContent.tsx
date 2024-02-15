@@ -9,7 +9,7 @@ type MediaItem = {
 };
 
 type SectionContentProps = {
-  data: { results: MediaItem[] };
+  data?: { results: MediaItem[] };
   title: string;
   href: string;
   type: "movie" | "tv";

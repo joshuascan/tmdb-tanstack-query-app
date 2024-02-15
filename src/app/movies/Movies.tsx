@@ -45,24 +45,30 @@ const Movies = () => {
 
   return (
     <div className={container({ my: 12 })}>
-      <SectionContent
-        data={topRatedData}
-        title="Top Rated Movies"
-        href="/movies/top-rated"
-        type="movie"
-      />
-      <SectionContent
-        data={popularData}
-        title="Popular Movies"
-        href="/movies/popular"
-        type="movie"
-      />
-      <SectionContent
-        data={upcomingData}
-        title="Upcoming Movies"
-        href="/movies/upcoming"
-        type="movie"
-      />
+      {topRatedData && (
+        <SectionContent
+          data={topRatedData}
+          title="Top Rated Movies"
+          href="/movies/top-rated"
+          type="movie"
+        />
+      )}
+      {popularData && (
+        <SectionContent
+          data={popularData}
+          title="Popular Movies"
+          href="/movies/popular"
+          type="movie"
+        />
+      )}
+      {upcomingData && ( // Add this lin}
+        <SectionContent
+          data={upcomingData}
+          title="Upcoming Movies"
+          href="/movies/upcoming"
+          type="movie"
+        />
+      )}
     </div>
   );
 };
