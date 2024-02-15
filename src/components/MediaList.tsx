@@ -5,7 +5,6 @@ import { calculateTotalPages } from "@/utils/helperFunctions";
 import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 import { flex } from "../../styled-system/patterns";
 import BackButton from "./BackButton";
-import { css } from "../../styled-system/css";
 
 interface MediaItem {
   id: number;
@@ -43,8 +42,6 @@ const MediaList = <T extends MediaItem>({
     <div className={flex({ direction: "column" })}>
       <div
         className={flex({
-          // borderWidth: "1px",
-          // borderColor: "red",
           mt: 6,
           width: "90vw",
           mx: "auto",

@@ -1,5 +1,5 @@
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
-import fetchOptions from "@/lib/fetchOptions";
+import fetchOptions from "@/lib/fetch-options";
 
 type TMDBQueryParams = {
   key: (string | number)[];
