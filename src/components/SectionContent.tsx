@@ -54,7 +54,7 @@ const SectionContent = ({ data, title, href, type }: SectionContentProps) => {
         {data &&
           data.results.slice(0, 3).map((item: any) => {
             return type === "movie" ? (
-              <MovieCard key={item.id} {...item} />
+              <MovieCard key={item.id} data={item} />
             ) : (
               <TvShowCard key={item.id} {...item} />
             );
