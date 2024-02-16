@@ -23,6 +23,7 @@ const MediaCard: React.FC<MediaCardProps> = ({ data, mediaType }) => {
     mediaType === MediaType.Movie
       ? (data as Movie).release_date
       : (data as TvShow).first_air_date;
+  const urlPrefix = mediaType === MediaType.Movie ? "movies" : "tv";
   const [isLoading, setIsLoading] = useState(true);
   const roundedNumber = Number(parseFloat(vote_average.toFixed(1)));
 
@@ -36,8 +37,8 @@ const MediaCard: React.FC<MediaCardProps> = ({ data, mediaType }) => {
         margin: "8",
       })}
     >
-      <Link href={`/movies/${id}`}>
-        <div className={vstack({ w: 350 })}>
+      <Link href={`/${urlPrefix}/${id}`}>
+        <div className={vstack({ w: 350, h: "auto" })}>
           {isLoading && (
             <div
               className={flex({

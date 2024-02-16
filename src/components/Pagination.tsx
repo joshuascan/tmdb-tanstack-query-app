@@ -57,7 +57,7 @@ const Pagination = ({ page, setPage, totalPages }: PaginationProps) => {
         bg: "slate.200",
       })}
     >
-      <p className={css({ fontWeight: "bold", fontSize: "xl", mb: 2 })}>
+      <p className={css({ fontWeight: "semibold", fontSize: "xl", mb: 2 })}>
         Page {page}
       </p>
       <div className={hstack({ gap: 4 })}>
