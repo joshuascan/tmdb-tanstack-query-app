@@ -2,6 +2,7 @@
 import getQueryClient from "@/lib/query-client";
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import MediaList from "@/components/MediaList";
+import { MediaType } from "@/types";
 
 export default function Page() {
   const queryClient = getQueryClient();
@@ -11,7 +12,7 @@ export default function Page() {
       <MediaList
         endpoint="/tv/popular"
         queryKey="popularTvShows"
-        mediaType="tv"
+        mediaType={MediaType.Tv}
       />
     </HydrationBoundary>
   );

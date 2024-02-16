@@ -2,7 +2,7 @@ import Image from "next/image";
 import { css } from "../../styled-system/css";
 import { flex, vstack } from "../../styled-system/patterns";
 import { EMPTY_MOVIE_URL, IMAGE_URL } from "@/lib/urls";
-import { Movie, TvShow } from "@/types";
+import { MediaType, Movie, TvShow } from "@/types";
 import Link from "next/link";
 import { useState } from "react";
 import Spinner from "./Spinner";
@@ -10,15 +10,17 @@ import { formatDate } from "@/utils/helperFunctions";
 
 interface MediaCardProps {
   data: Movie | TvShow;
-  mediaType: "movie" | "tv";
+  mediaType: MediaType;
 }
 
 const MediaCard: React.FC<MediaCardProps> = ({ data, mediaType }) => {
   const { id, vote_average, poster_path } = data;
   const title =
-    mediaType === "movie" ? (data as Movie).title : (data as TvShow).name;
+    mediaType === MediaType.Movie
+      ? (data as Movie).title
+      : (data as TvShow).name;
   const release_date =
-    mediaType === "movie"
+    mediaType === MediaType.Movie
       ? (data as Movie).release_date
       : (data as TvShow).first_air_date;
   const [isLoading, setIsLoading] = useState(true);

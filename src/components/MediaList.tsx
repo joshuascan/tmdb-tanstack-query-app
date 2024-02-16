@@ -6,12 +6,12 @@ import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 import { flex } from "../../styled-system/patterns";
 import BackButton from "./BackButton";
 import MediaCard from "./MediaCard";
-import { Movie, TvShow } from "@/types";
+import { MediaType, Movie, TvShow } from "@/types";
 
 interface MediaListProps {
   endpoint: string;
   queryKey: string;
-  mediaType: "movie" | "tv";
+  mediaType: MediaType;
 }
 
 const MediaList = ({ endpoint, queryKey, mediaType }: MediaListProps) => {

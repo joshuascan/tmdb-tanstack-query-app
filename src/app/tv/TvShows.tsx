@@ -3,7 +3,7 @@
 import { container } from "../../../styled-system/patterns";
 import SectionContent from "@/components/SectionContent";
 import useTMDBQuery from "@/hooks/useTMDBQuery";
-import { TvShowResponse } from "@/types";
+import { MediaType, TvShowResponse } from "@/types";
 import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 
 const TvShows = () => {
@@ -41,7 +41,7 @@ const TvShows = () => {
           data={topRatedData}
           title="Top Rated TV Shows"
           href="/tv/top-rated"
-          mediaType="tv"
+          mediaType={MediaType.Tv}
         />
       )}
       {popularData && (
@@ -49,7 +49,7 @@ const TvShows = () => {
           data={popularData}
           title="Popular TV Shows"
           href="/tv/popular"
-          mediaType="tv"
+          mediaType={MediaType.Tv}
         />
       )}
     </div>

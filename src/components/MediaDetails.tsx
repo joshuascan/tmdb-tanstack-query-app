@@ -4,6 +4,7 @@ import useTMDBQuery from "@/hooks/useTMDBQuery";
 import {
   CastDetails,
   CreditsResponse,
+  MediaType,
   MovieDetails,
   TvShowDetails,
 } from "@/types";
@@ -15,7 +16,7 @@ import TvDetailsCard from "./TvDetailsCard";
 import mediaConfig from "@/lib/media-config";
 
 interface MediaDetailsProps {
-  mediaType: "movie" | "tv";
+  mediaType: MediaType;
 }
 
 const MediaDetails = ({ mediaType }: MediaDetailsProps) => {

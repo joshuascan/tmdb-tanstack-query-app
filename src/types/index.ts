@@ -60,3 +60,8 @@ export type CastDetails = {
 export type CreditsResponse = {
   cast: CastDetails[];
 };
+
+export enum MediaType {
+  Movie = "movie",
+  Tv = "tv",
+}

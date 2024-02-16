@@ -3,7 +3,7 @@
 import { container } from "../../../styled-system/patterns";
 import SectionContent from "@/components/SectionContent";
 import useTMDBQuery from "@/hooks/useTMDBQuery";
-import { MovieResponse } from "@/types";
+import { MediaType, MovieResponse } from "@/types";
 import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 
 const Movies = () => {
@@ -50,7 +50,7 @@ const Movies = () => {
           data={topRatedData}
           title="Top Rated Movies"
           href="/movies/top-rated"
-          mediaType="movie"
+          mediaType={MediaType.Movie}
         />
       )}
       {popularData && (
@@ -58,7 +58,7 @@ const Movies = () => {
           data={popularData}
           title="Popular Movies"
           href="/movies/popular"
-          mediaType="movie"
+          mediaType={MediaType.Movie}
         />
       )}
       {upcomingData && (
@@ -66,7 +66,7 @@ const Movies = () => {
           data={upcomingData}
           title="Upcoming Movies"
           href="/movies/upcoming"
-          mediaType="movie"
+          mediaType={MediaType.Movie}
         />
       )}
     </div>

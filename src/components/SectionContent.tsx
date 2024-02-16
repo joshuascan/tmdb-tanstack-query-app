@@ -2,6 +2,7 @@ import Link from "next/link";
 import { css } from "../../styled-system/css";
 import { flex, hstack } from "../../styled-system/patterns";
 import MediaCard from "./MediaCard";
+import { MediaType } from "@/types";
 
 type MediaItem = {
   id: number;
@@ -11,7 +12,7 @@ type SectionContentProps = {
   data?: { results: MediaItem[] };
   title: string;
   href: string;
-  mediaType: "movie" | "tv";
+  mediaType: MediaType;
 };
 
 const sectionStyles = flex({
