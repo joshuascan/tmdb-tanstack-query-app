@@ -5,25 +5,19 @@ import { calculateTotalPages } from "@/utils/helperFunctions";
 import useLoadingOrErrorComponent from "@/hooks/useLoadingOrErrorComponent";
 import { flex } from "../../styled-system/patterns";
 import BackButton from "./BackButton";
+import MediaCard from "./MediaCard";
+import { Movie, TvShow } from "@/types";
 
-interface MediaItem {
-  id: number;
-}
-
-interface MediaListProps<T extends MediaItem> {
+interface MediaListProps {
   endpoint: string;
   queryKey: string;
-  cardComponent: React.ComponentType<{ data: T }>;
+  mediaType: "movie" | "tv";
 }
 
-const MediaList = <T extends MediaItem>({
-  endpoint,
-  queryKey,
-  cardComponent: CardComponent,
-}: MediaListProps<T>) => {
+const MediaList = ({ endpoint, queryKey, mediaType }: MediaListProps) => {
   const [page, setPage] = useState(1);
   const { data, isLoading, isError } = useTMDBQuery<{
-    results: T[];
+    results: (Movie | TvShow)[];
     total_pages?: number;
   }>({
     key: [queryKey, page],
@@ -52,7 +46,7 @@ const MediaList = <T extends MediaItem>({
       </div>
       <div className={flex({ justify: "center", wrap: "wrap" })}>
         {data?.results.map((item) => (
-          <CardComponent key={item.id} data={item} />
+          <MediaCard key={item.id} data={item} mediaType={mediaType} />
         ))}
       </div>
       <Pagination page={page} setPage={setPage} totalPages={totalPages} />

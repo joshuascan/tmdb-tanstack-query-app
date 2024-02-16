@@ -12,26 +12,29 @@ import { flex } from "../../styled-system/patterns";
 import { css } from "../../styled-system/css";
 import MovieDetailsCard from "./MovieDetailsCard";
 import TvDetailsCard from "./TvDetailsCard";
+import mediaConfig from "@/lib/media-config";
 
 interface MediaDetailsProps {
-  type: "movie" | "tv";
+  mediaType: "movie" | "tv";
 }
 
-const MediaDetails = ({ type }: MediaDetailsProps) => {
+const MediaDetails = ({ mediaType }: MediaDetailsProps) => {
   const { id } = useParams<{ id: string }>();
   const queryEnabled = id !== undefined;
+  const config = mediaConfig[mediaType];
 
-  const detailsQueryKey = type === "movie" ? "movieDetails" : "tvDetails";
-  const creditsQueryKey = type === "movie" ? "movieCredits" : "tvCredits";
-  const endpointPrefix = type === "movie" ? "/movie" : "/tv";
+  const DetailsComponent = {
+    movie: MovieDetailsCard,
+    tv: TvDetailsCard,
+  }[mediaType];
 
   const {
     data: detailsData,
     isLoading: isLoadingDetails,
     isError: isErrorDetails,
   } = useTMDBQuery<MovieDetails | TvShowDetails>({
-    key: [detailsQueryKey, id],
-    endpoint: `${endpointPrefix}/${id}`,
+    key: [config.detailsQueryKey, id],
+    endpoint: `${config.endpointPrefix}/${id}`,
     enabled: queryEnabled,
   });
 
@@ -40,8 +43,8 @@ const MediaDetails = ({ type }: MediaDetailsProps) => {
     isLoading: isLoadingCredits,
     isError: isErrorCredits,
   } = useTMDBQuery<CreditsResponse>({
-    key: [creditsQueryKey, id],
-    endpoint: `${endpointPrefix}/${id}/credits`,
+    key: [config.creditsQueryKey, id],
+    endpoint: `${config.endpointPrefix}/${id}/credits`,
     enabled: queryEnabled,
   });
 
@@ -56,8 +59,7 @@ const MediaDetails = ({ type }: MediaDetailsProps) => {
 
   return (
     <div className={flex({ direction: "column" })}>
-      {type === "movie" && <MovieDetailsCard {...detailsData} />}
-      {type === "tv" && <TvDetailsCard {...detailsData} />}
+      <DetailsComponent {...detailsData} />
       <div className={flex({ direction: "column", align: "center", mt: 24 })}>
         <h2 className={css({ fontSize: "4xl", fontWeight: "bold" })}>Cast</h2>
         <div

@@ -8,7 +8,7 @@ export default function Page() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <MediaDetails type="tv" />
+      <MediaDetails mediaType="tv" />
     </HydrationBoundary>
   );
 }
